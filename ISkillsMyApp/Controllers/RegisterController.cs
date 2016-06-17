@@ -11,6 +11,7 @@ namespace ISkillsMyApp.Controllers
         // GET: Register
         public ActionResult Index()
         {
+            Console.WriteLine();
             return View();
         }
     }

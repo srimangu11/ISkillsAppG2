@@ -8,10 +8,19 @@ namespace ISkillsMyApp.Controllers
 {
     public class HomePageController : Controller
     {
+        Models.ISkillsContext db = new Models.ISkillsContext();
+
         // GET: HomePage
         public ActionResult Index()
         {
-            return View();
+            var cat = db.Categories.ToList();
+            return View(cat);
+        }
+
+        public PartialViewResult productPartial(int id)
+        {
+            var prod = db.Products.Where(p => p.CategoryID == id);
+            return PartialView("_productPartial", prod);
         }
     }
 }

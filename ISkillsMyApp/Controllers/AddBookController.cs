@@ -1,33 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity.Infrastructure;
 using System.Web;
-using System.Web.Mvc;
 using ISkillsMyApp.Models;
+using System.Web.Mvc;
 
 namespace ISkillsMyApp.Controllers
 {
-    public class RegisterController : Controller
+    public class AddBookController : Controller
     {
-        public Customer Details { get; private set; }
-
-        // GET: Register
+        public Product Details { get; private set; }
+        // GET: AddBook
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-
         [HttpPost]
-        public ActionResult Index(Customer Details)
+        public ActionResult Index(Product Details)
         {
             ISkillsContext db = new ISkillsContext();
-            db.Customers.Add(Details);
+            db.Products.Add(Details);
             db.SaveChanges();
             return View();
         }
 
-      
     }
 }

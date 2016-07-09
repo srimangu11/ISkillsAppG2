@@ -16,7 +16,10 @@
             <th>
                 Item
             </th>
-
+           
+            <th>
+                Image
+            </th>
 
             <th class="text-right">
                 Price
@@ -38,6 +41,10 @@
                 <td class="text-left">
                     @item.Product.ProductName
                 </td>
+                <td class="text-left">
+                    <img src="@Url.Content(@item.Product.Image)" width="170" height="276" />
+                </td>
+
                 <td class="text-right">
                     @item.Product.Price.ToString("c")
                 </td>
@@ -67,7 +74,7 @@
     </tfoot>
 </table>
 <div class="text-right">
-    <a class="btn btn-primary" href="@Model.ReturnUrl">
+    <a class="btn btn-primary" href="Shop/Index">
         Continue Shopping
     </a>
     @Html.ActionLink("Checkout", "ShippingInfo", null, new { @class="btn btn-primary"})

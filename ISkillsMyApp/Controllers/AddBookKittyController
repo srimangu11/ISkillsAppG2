@@ -9,7 +9,7 @@ namespace ISkillsMyApp.Controllers
 {
     public class AddBookController : Controller
     {
-        //public Product Details { get; private set; }
+        public Product Details { get; private set; }
         // GET: AddBook
         [HttpGet]
         public ActionResult Index()
@@ -23,7 +23,7 @@ namespace ISkillsMyApp.Controllers
             db.Products.Add(Details);
             db.SaveChanges();
             return View();
-
         }
+
     }
 }

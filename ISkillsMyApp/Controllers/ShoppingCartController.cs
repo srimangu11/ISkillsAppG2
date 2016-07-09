@@ -19,18 +19,18 @@ namespace ISkillsMyApp.Controllers
         {
             return View(new ShoppingCartViewModel
             {
-                Cart =GetCart(),
-                ReturnUrl=returnUrl
+                Cart = GetCart(),
+                ReturnUrl = returnUrl
             }
                 );
         }
 
         public RedirectToRouteResult AddToCart(int productID, string returnUrl)
         {
-            Product product = db.Products.SingleOrDefault(p=>p.ProductID==productID);
-            if(product!=null)
+            Product product = db.Products.SingleOrDefault(p => p.ProductID == productID);
+            if (product != null)
             {
-                GetCart().AddItem(product,1);
+                GetCart().AddItem(product, 1);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
@@ -44,7 +44,7 @@ namespace ISkillsMyApp.Controllers
         private ShoppingCartModel GetCart()
         {
             ShoppingCartModel Cart = (ShoppingCartModel)Session["Cart"];
-            if(Cart== null)
+            if (Cart == null)
             {
                 Cart = new ShoppingCartModel();
                 Session["Cart"] = Cart;
@@ -60,7 +60,7 @@ namespace ISkillsMyApp.Controllers
         [HttpPost]
         public ActionResult ShippingInfo(ShippingInfo ShippingInfo)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 ShoppingCartModel cart = GetCart();
                 cart.ShippingInfo = ShippingInfo;
@@ -110,38 +110,38 @@ namespace ISkillsMyApp.Controllers
         {
             Customer customer = new Customer
             {
-                FirstName=cart.BillingInfo.FirstName,
-                LastName=cart.BillingInfo.LastName,
-                BillingAddress=cart.BillingInfo.Address,
-                BillingCity=cart.BillingInfo.City,
-                BillingState=cart.BillingInfo.State,
-                BillingPostalCode=cart.BillingInfo.Zip,
-                CardNumber=cart.BillingInfo.CreditCardNumber,
-                ExpirationMonth=cart.BillingInfo.ExpirationMonth,
-                ExpirationYear=cart.BillingInfo.ExpirationYear
+                FirstName = cart.BillingInfo.FirstName,
+                LastName = cart.BillingInfo.LastName,
+                BillingAddress = cart.BillingInfo.Address,
+                BillingCity = cart.BillingInfo.City,
+                BillingState = cart.BillingInfo.State,
+                BillingPostalCode = cart.BillingInfo.Zip,
+                CardNumber = cart.BillingInfo.CreditCardNumber,
+                ExpirationMonth = cart.BillingInfo.ExpirationMonth,
+                ExpirationYear = cart.BillingInfo.ExpirationYear
             };
             db.Customers.Add(customer);
             db.SaveChanges();
 
             Order order = new Order()
             {
-                CustomerID=customer.CustomerID,
-                OrderDate=DateTime.Now,
-                ShippingAddress=cart.ShippingInfo.Address,
-                ShippingCity=cart.ShippingInfo.City,
-                ShippingState=cart.ShippingInfo.State,
-                ShippingPostalCode=cart.ShippingInfo.Zip,
+                CustomerID = customer.CustomerID,
+                OrderDate = DateTime.Now,
+                ShippingAddress = cart.ShippingInfo.Address,
+                ShippingCity = cart.ShippingInfo.City,
+                ShippingState = cart.ShippingInfo.State,
+                ShippingPostalCode = cart.ShippingInfo.Zip,
 
             };
             db.Orders.Add(order);
             db.SaveChanges();
-            foreach(ShoppingCartItemModel item in cart.Items)
+            foreach (ShoppingCartItemModel item in cart.Items)
             {
                 OrderItem orderItem = new OrderItem()
                 {
-                    OrderID=order.OrderID,
-                    ProductID=item.Product.ProductID,
-                    Quantity =item.Quantity
+                    OrderID = order.OrderID,
+                    ProductID = item.Product.ProductID,
+                    Quantity = item.Quantity
                 };
                 db.OrderItems.Add(orderItem);
             }

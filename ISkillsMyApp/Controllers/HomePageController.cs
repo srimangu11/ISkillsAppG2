@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ISkillsMyApp.Models;
 
 namespace ISkillsMyApp.Controllers
 {
@@ -11,7 +12,16 @@ namespace ISkillsMyApp.Controllers
         // GET: HomePage
         public ActionResult Index()
         {
-            return View();
+            ISkillsContext c = new ISkillsContext();
+            List<Categories> category = c.Categories.ToList();
+
+            return View(category);
+        }
+        public ActionResult ProductView(int id)
+        {
+            ISkillsContext c = new ISkillsContext();
+            IEnumerable<Product> product = c.Products.Where(x => x.CategoryID == id);
+            return View(product);
+        }
         }
     }
-}

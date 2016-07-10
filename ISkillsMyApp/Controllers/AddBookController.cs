@@ -7,13 +7,15 @@ using System.Web.Mvc;
 
 namespace ISkillsMyApp.Controllers
 {
-    public class AddBookController : Controller
+    public class HomePageController : Controller
     {
+        // GET: HomePage
         //public Product Details { get; private set; }
         // GET: AddBook
         [HttpGet]
         public ActionResult Index()
         {
+            return View();
             return View();
         }
         [HttpPost]

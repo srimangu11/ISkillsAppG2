@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ISkillsMyApp.Controllers
 {
-    public class HomePageController : Controller
+    public class AddBookController : Controller
     {
         // GET: HomePage
         //public Product Details { get; private set; }

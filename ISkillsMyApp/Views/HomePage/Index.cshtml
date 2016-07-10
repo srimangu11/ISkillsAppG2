@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<ISkillsMyApp.Models.Categories>
 @{
     ViewBag.Title = "Online Books Store HomePage";
 }
@@ -7,6 +7,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <title></title>
 </head>
 <body>
@@ -22,6 +24,50 @@
         <li>Using MVC</li>
         <li>We will work with EF</li>
     </ul>
+
+    <div>
+        @{
+            var dropDownListItems = new List<SelectListItem>();
+            foreach (var c in Model)
+            {
+                dropDownListItems.Add(new SelectListItem { Text = c.CategoryName, Value = c.CategoryID + "" });
+            }
+        }
+
+        @Html.DropDownList("Category", dropDownListItems, new { @class = "list" })
+    </div>
+    <br />
+    <div id="productList">
+
+    </div>
+
+    @foreach (var cat in Model)
+    {
+        @Ajax.ActionLink(cat.CategoryName + " ", "productPartial", "HomePage", new { @id = cat.CategoryID },
+               new AjaxOptions
+               {
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "prodDisplay",
+                   HttpMethod = "GET"
+               })
+    }
+    <div id="prodDisplay"></div>
+
+    <script>
+        $("#Category").change(function () {
+            var selectedCategory = $("#Category").val().trim();
+            $.ajax({
+                url: "/HomePage/productPartial",
+                type: "get",
+                data: { id: selectedCategory },
+                success: function (data) {
+                    $("#productList").empty().append(data);
+                },
+                error: function (e) {
+                    alert("Error retrieving the data");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-

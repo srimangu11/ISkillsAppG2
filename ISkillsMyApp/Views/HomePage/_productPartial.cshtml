@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ISkillsMyApp.Models.Product>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Prodcut ID
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Image
+            </th>
+            <th></th>
+        </tr>
+        @{
+            foreach (var pro in Model.ToList())
+            {
+                <tr>
+                    <td>@pro.ProductID </td>
+                    <td> @pro.ProductName</td>
+                    <td><img src="" alt="problem in image loading" /></td>
+                    <td>
+                        <a href="/ItemDetail/Index/@pro.ProductID">Goto Prod Page</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

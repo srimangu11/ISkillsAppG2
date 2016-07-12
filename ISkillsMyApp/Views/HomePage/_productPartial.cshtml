@@ -17,11 +17,11 @@
         @{
             foreach (var pro in Model.ToList())
             {
-                string prodImage = @pro.Image;
+                string productImage = @pro.Image;
                 <tr>
                     <td>@pro.ProductID </td>
                     <td> @pro.ProductName</td>
-                    <td><img src=prodImage alt="problem in image loading" /></td>
+                    <td><img src=productImage alt="problem in image loading" /></td>
                     @*<td> <img src="~/Images/999.png" />   </td>*@
                     <td>
                         <a href="/ItemDetail/Index/@pro.ProductID">Goto Prod Page</a>

@@ -15,14 +15,13 @@ namespace ISkillsMyApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //return View();
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Product Details)
+        public ActionResult Index(Product Det)
         {
             ISkillsContext db = new ISkillsContext();
-            db.Products.Add(Details);
+            db.Products.Add(Det);
             db.SaveChanges();
             return View();
 

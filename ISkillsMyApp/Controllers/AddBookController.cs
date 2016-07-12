@@ -15,7 +15,7 @@ namespace ISkillsMyApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            //return View();
             return View();
         }
         [HttpPost]

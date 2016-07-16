@@ -29,13 +29,15 @@ namespace ISkillsMyApp.Controllers
             {
                 db.Customers.Add(Details);
                 db.SaveChanges();
+                return View("regsucc");
             }
             else
             {
                 //throw error
+
+                Console.WriteLine("You entered already existing information");
+                return View();
             }
-            
-            return View();
 
 
         }
